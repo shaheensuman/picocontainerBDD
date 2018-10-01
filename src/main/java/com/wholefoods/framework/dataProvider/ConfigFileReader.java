@@ -22,13 +22,16 @@ public class ConfigFileReader {
     }
 
     public String getDriverPath(){
-        String driverPath=properties.getProperty("driverPath");
-        System.out.println(driverPath);
+
+        String path=properties.getProperty("driverPath");
+        String driverPath ="src//main//resources//drivers//"+path+"driver.exe";
         if (driverPath!=null){
             return driverPath;
         }
         else throw new RuntimeException("Driver path is not specified in the configuration.properties file");
     }
+
+
     public Long getImplicitWait(){
         String implicitWait=properties.getProperty("implicitWait");
         if (implicitWait!=null){
@@ -37,8 +40,15 @@ public class ConfigFileReader {
         else throw new RuntimeException("implicit wait is not specified in the configuration.properties file");
     }
     public String getApplicationUrl(){
+
         String applicationUrl=properties.getProperty("url");
-        System.out.println(applicationUrl);
+        if(applicationUrl.equalsIgnoreCase("FTF")){
+            applicationUrl="https://www.wholefoodsmarket.com/";
+        }else if(applicationUrl.equalsIgnoreCase("QAF")){
+            applicationUrl="https://github.com/mozilla/geckodriver/releases";
+        }else if(applicationUrl.equalsIgnoreCase("QAT")){
+            applicationUrl="https://mvnrepository.com/artifact/info.cukes/cucumber-picocontainer/1.2.5";
+        }
         if (applicationUrl!=null){
             return applicationUrl;
         }
